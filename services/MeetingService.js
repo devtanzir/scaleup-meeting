@@ -12,6 +12,7 @@ export const meetingService = ({
   profileName,
   clientMeetingTime,
   myTime,
+  quotation,
 }) => {
   let meeting = new Meetings({
     meetingTopic,
@@ -19,6 +20,7 @@ export const meetingService = ({
     profileName,
     clientMeetingTime,
     myTime,
+    quotation,
   });
   // save in database
   return meeting.save();

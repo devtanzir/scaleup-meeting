@@ -12,8 +12,14 @@ import error from "../utils/error.js";
 
 const createMeetingController = async (req, res, next) => {
   // get the data from req body
-  const { meetingTopic, clientName, profileName, clientMeetingTime, myTime } =
-    req.body;
+  const {
+    meetingTopic,
+    clientName,
+    profileName,
+    clientMeetingTime,
+    myTime,
+    quotation,
+  } = req.body;
   try {
     if (
       !meetingTopic ||
@@ -22,7 +28,7 @@ const createMeetingController = async (req, res, next) => {
       !clientMeetingTime ||
       !myTime
     ) {
-      return res.status(400).json({ message: "invalid data" });
+      return res.status(400).json({ message: "invalid data found" });
     }
     // meeting service
     const meeting = await meetingService({
@@ -31,6 +37,7 @@ const createMeetingController = async (req, res, next) => {
       profileName,
       clientMeetingTime,
       myTime,
+      quotation,
     });
     return res
       .status(201)
@@ -50,8 +57,14 @@ const patchMeetingById = async (req, res, next) => {
   // get meeting id from req params
   const { meetingId } = req.params;
 
-  const { meetingTopic, clientName, profileName, clientMeetingTime, myTime } =
-    req.body;
+  const {
+    meetingTopic,
+    clientName,
+    profileName,
+    clientMeetingTime,
+    myTime,
+    quotation,
+  } = req.body;
 
   try {
     // find user service
@@ -70,6 +83,8 @@ const patchMeetingById = async (req, res, next) => {
     meeting.clientMeetingTime = clientMeetingTime ?? meeting.clientMeetingTime;
 
     meeting.myTime = myTime ?? meeting.myTime;
+
+    meeting.quotation = quotation ?? meeting.quotation;
 
     await meeting.save();
 

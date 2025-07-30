@@ -22,6 +22,9 @@ const meetingSchema = new Schema(
       type: String,
       required: true,
     },
+    quotation: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
