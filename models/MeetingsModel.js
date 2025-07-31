@@ -25,6 +25,21 @@ const meetingSchema = new Schema(
     quotation: {
       type: String,
     },
+    notes: {
+      type: String,
+    },
+    yourName: {
+      type: String,
+      required: true,
+    },
+    isPending: {
+      type: Boolean,
+      required: true,
+    },
+    clientTimezone: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

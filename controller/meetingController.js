@@ -19,6 +19,10 @@ const createMeetingController = async (req, res, next) => {
     clientMeetingTime,
     myTime,
     quotation,
+    notes,
+    yourName,
+    isPending,
+    clientTimezone,
   } = req.body;
   try {
     if (
@@ -26,9 +30,12 @@ const createMeetingController = async (req, res, next) => {
       !clientName ||
       !profileName ||
       !clientMeetingTime ||
-      !myTime
+      !myTime ||
+      !yourName ||
+      !isPending ||
+      !clientTimezone
     ) {
-      return res.status(400).json({ message: "invalid data found" });
+      return res.status(400).json({ message: "Invalid data found" });
     }
     // meeting service
     const meeting = await meetingService({
@@ -38,6 +45,10 @@ const createMeetingController = async (req, res, next) => {
       clientMeetingTime,
       myTime,
       quotation,
+      notes,
+      yourName,
+      isPending,
+      clientTimezone,
     });
     return res
       .status(201)
@@ -64,6 +75,10 @@ const patchMeetingById = async (req, res, next) => {
     clientMeetingTime,
     myTime,
     quotation,
+    notes,
+    yourName,
+    isPending,
+    clientTimezone,
   } = req.body;
 
   try {
@@ -85,6 +100,14 @@ const patchMeetingById = async (req, res, next) => {
     meeting.myTime = myTime ?? meeting.myTime;
 
     meeting.quotation = quotation ?? meeting.quotation;
+
+    meeting.yourName = yourName ?? meeting.yourName;
+
+    meeting.notes = notes ?? meeting.notes;
+
+    meeting.isPending = isPending ?? meeting.isPending;
+
+    meeting.clientTimezone = clientTimezone ?? meeting.clientTimezone;
 
     await meeting.save();
 
