@@ -32,7 +32,7 @@ const createMeetingController = async (req, res, next) => {
       !clientMeetingTime ||
       !myTime ||
       !yourName ||
-      !isPending ||
+      // !isPending ||
       !clientTimezone
     ) {
       return res.status(400).json({ message: "Invalid data found" });
